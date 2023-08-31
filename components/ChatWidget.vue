@@ -1,27 +1,55 @@
 <script setup lang="ts">
-import { Message, User } from "~~/types";
+import { Message, User } from '~~/types'
 
 const me = ref<User>({
-  id: "user",
-  avatar: "/avatar.jpg",
-  name: "You",
-});
+  id: 'user',
+  avatar: '/avatar.jpg',
+  name: 'You',
+})
 const bot = ref<User>({
-  id: "assistant",
-  avatar: "/bot.jpg",
-  name: "Botman",
-});
+  id: 'assistant',
+  avatar: '/bot.jpg',
+  name: 'Botman',
+})
 
-const users = computed(() => [me.value, bot.value]);
+const users = computed(() => [me.value, bot.value])
 
-const messages = ref<Message[]>([]);
+const messages = ref<Message[]>([])
 
-const usersTyping = ref<User[]>([]);
+const usersTyping = ref<User[]>([])
 
 // send messages to Chat API here
 // and in the empty function below
 
-async function handleNewMessage(message: Message) {}
+const handleNewMessage = async (message: Message) => {
+  if (!message.text) return
+
+  messages.value.push(message)
+  usersTyping.value.push(bot.value)
+  const res = await $fetch('/api/ai', {
+    method: 'POST',
+    body: {
+      messages: [
+        {
+          content: message.text,
+          role: 'user',
+        },
+      ],
+    },
+  })
+
+  if (!res.choices[0].message?.content) return
+
+  const msg = {
+    id: res.id,
+    userId: bot.value.id,
+    createdAt: new Date(),
+    text: res.choices[0].message?.content,
+  }
+
+  messages.value.push(msg)
+  usersTyping.value = []
+}
 </script>
 <template>
   <ChatBox

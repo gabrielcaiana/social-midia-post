@@ -21,5 +21,5 @@ export default defineEventHandler(async (event) => {
     temperature: body.temperature || 1,
   });
 
-  return completion.choices[0]
+  return completion
 })
