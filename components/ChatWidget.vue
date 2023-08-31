@@ -16,6 +16,17 @@ const users = computed(() => [me.value, bot.value])
 
 const messages = ref<Message[]>([])
 
+const messagesForApi = computed(() => {
+  const messageHistory = messages.value
+    .map((m) => ({
+      content: m.text,
+      role: m.userId,
+    }))
+    .slice(-2)
+
+  return messageHistory
+})
+
 const usersTyping = ref<User[]>([])
 
 // send messages to Chat API here
@@ -29,12 +40,7 @@ const handleNewMessage = async (message: Message) => {
   const res = await $fetch('/api/ai', {
     method: 'POST',
     body: {
-      messages: [
-        {
-          content: message.text,
-          role: 'user',
-        },
-      ],
+      messages: messagesForApi.value,
     },
   })
 
