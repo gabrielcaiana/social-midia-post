@@ -1,5 +1,6 @@
 
 import OpenAI from "openai";
+import { customerSupportAgent } from '~/agents'
 
 interface EventBody {
   messages: OpenAI.Chat.ChatCompletionMessage[]
@@ -19,6 +20,7 @@ export default defineEventHandler(async (event) => {
     model: "gpt-3.5-turbo",
     messages: body.messages || [],
     temperature: body.temperature || 1,
+    ...customerSupportAgent(body)
   });
 
   return completion
