@@ -4,12 +4,12 @@ import type { Agent } from "@/agents";
  * meant to be extended by specific soical platform composables
  */
 import type { AsyncState } from "@/types";
-import type { CreateChatCompletionResponse } from "openai";
+import openai from "openai";
 
 export const useChatAi = ({ agent }: { agent: Agent }) => {
   const state = ref<AsyncState>(null);
   const error = ref();
-  const res = ref<CreateChatCompletionResponse>();
+  const res = ref<openai.Chat.ChatCompletion>();
 
   const usage = computed(() => res.value?.usage);
   const choices = computed(() => res.value?.choices || []);
@@ -21,13 +21,13 @@ export const useChatAi = ({ agent }: { agent: Agent }) => {
     try {
       state.value = "loading";
 
-      const result = await fetchWithTimeout<CreateChatCompletionResponse>(
+      const result = await fetchWithTimeout<openai.Chat.ChatCompletion>(
         `/api/ai`,
         {
           method: "POST",
           body: {
             ...options,
-            agent,
+            agent: `${agent}Agent`,
           },
         }
       );
