@@ -30,3 +30,13 @@ Content-Type: application/json
     "agent": "facebookAgent",
     "url": "https://www.gabrielcaiana.com/blog/nuxt-webpack-analyze"
   }
+
+### Request to local API with Twitter agent
+
+POST http://localhost:3000/api/ai
+Content-Type: application/json
+
+  {
+    "agent": "twitterAgent",
+    "url": "https://www.gabrielcaiana.com/blog/nuxt-webpack-analyze"
+  }
