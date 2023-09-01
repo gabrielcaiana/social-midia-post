@@ -1,42 +1,4 @@
-# Nuxt 3 Minimal Starter
+# Social Media Post Generator
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+O 'Social Media Post Generator' é um aplicativo que permite aos usuários criar postagens para redes sociais de forma rápida e fácil. Ele funciona importando um URL de um artigo e gerando automaticamente uma postagem com base no conteúdo desse artigo. Os usuários podem personalizar a postagem, adicionar hashtags, mencionar usuários e até mesmo agendar a publicação em diferentes plataformas de mídia social. É uma ferramenta útil para quem deseja economizar tempo na criação de conteúdo para redes sociais.
 
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install
-```
-
-## Development Server
-
-Start the development server on http://localhost:3000
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
