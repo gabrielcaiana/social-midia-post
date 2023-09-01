@@ -4,7 +4,7 @@
       We'll work on the Social Media Post Generator after the chat widget,
       you can leave it commented out for now
     -->
-    <!-- <SocialMediaPostGenerator /> -->
+    <SocialMediaPostGenerator />
     <ChatWidget />
   </div>
 </template>
